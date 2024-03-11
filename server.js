@@ -1,5 +1,5 @@
 const express = require('express');
-const mysql = require('mysql12');
+const mysql = require('mysql2');
 const inquirer = require('inquirer');
 
 const PORT = process.env.PORT || 3001;
@@ -22,6 +22,11 @@ const db = mysql.createConnection(
     console.log(`Connected to the employee_db database.`)
   );
 
+ db.connect = (function (err) {
+    if(err) throw err;
+    questions();
+ });
+  
  function questions() {
     inquirer
     .prompt([{
