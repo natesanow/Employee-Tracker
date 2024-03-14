@@ -15,48 +15,49 @@ const connection = mysql.createConnection(
     },
   );
 
- connection.connect = (function (err) {
+ connection.connect(function (err) {
     if(err) throw err;
     questions();
  });
   
  function questions() {
-    inquirer
-      .prompt([{
-         type: "list",
-         name: "starterQuestion",
-         message: "What would you like to do?",
-         choices: [
-            "View all Employees",
-            "Add Employee",
-            "Update Employee Role",
-            "View all Roles",
-            "Add Role",
-            "View all Departments",
-            "Add Department",
-            "Exit Menu",
-         ],
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "starterQuestion",
+        message: "What would you like to do?",
+        choices: [
+          "View all Employees",
+          "Add Employee",
+          "Update Employee Role",
+          "View all Roles",
+          "Add Role",
+          "View all Departments",
+          "Add Department",
+          "Exit Menu",
+        ],
       },
     ])
     .then((answer) => {
-        if (answer.starterQuestion === "View all Employees ") {
-          viewAllEmployees();
-        } else if (answer.starterQuestion === "Add new employee") {
-          addEmployee();
-        } else if (answer.starterQuestion === "Update employee role") {
-          updateEmployee();
-        } else if (answer.starterQuestion === "View All roles") {
-          viewAllRoles();
-        } else if (answer.starterQuestion === "Add new role") {
-          addRole();
-        } else if (answer.starterQuestion === "View all Departments"){
-          viewAllDepartments();
-        } else if (answer.starterQuestion === "Add new department") {
-          addDepartment();
-        } else {
-          connection.end();
-        }
-      });
+      if (answer.starterQuestion === "View all Employees") {
+        viewAllEmployees();
+      } else if (answer.starterQuestion === "Add Employee") {
+        addEmployee();
+      } else if (answer.starterQuestion === "Update Employee Role") {
+        updateEmployee();
+      } else if (answer.starterQuestion === "View all Roles") {
+        viewAllRoles();
+      } else if (answer.starterQuestion === "Add Role") {
+        addRole();
+      } else if (answer.starterQuestion === "View all Departments") {
+        viewAllDepartments();
+      } else if (answer.starterQuestion === "Add Department") {
+        addDepartment();
+      } else {
+        connection.end();
+      }
+    });
 }
 
 function viewAllEmployees() {
