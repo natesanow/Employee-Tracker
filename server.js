@@ -107,3 +107,77 @@ function addEmployee() {
     questions();
   });
 }
+
+function addRole() {
+  inquirer
+  .prompt([
+    {
+      type: "input",
+      name: "title",
+      message: "what is the role title?",
+    },
+    {
+      type: "input",
+      name: "salary",
+      message: "what is the salary?",
+    },
+    {
+      type: "input",
+      name: "departmentId",
+      message: "what is the department ID?",
+    },
+  ])
+  .then((answers) => {
+    connection.query("INSERT INTO role SET?", {
+      title: answers.title,
+      salary: answers.salary,
+      department_id: answers.department_id,
+    });
+    questions();
+  });
+}
+
+function addDepartment() {
+  inquirer
+  .prompt([
+    {
+      type: "input",
+      name: "dept",
+      message: "what department are you adding?",
+    },
+  ])
+  .then((answer) => {
+    connection.query("INSERT INTO department SET", {
+      name: answer.dept,
+    });
+    questions();
+  });
+}
+
+function updateEmployee() {
+  inquirer
+  .prompt([
+    {
+      type: "input",
+      name: "employeeId",
+      message: "what employee ID is getting a new role?"
+    },
+    {
+      type: "input",
+      name: "roleId",
+      message: "what is the role ID for the new role?"
+    },
+  ])
+  .then(answers => {
+    connection.query("UPDATE employee SET ? WHERE ?", [
+      {
+        role_id: answers.roleId
+      },
+      {
+        id: answers.employeeId
+      }
+    ])
+    questions()
+  })
+}
+
