@@ -95,7 +95,17 @@ function addEmployee() {
     {
       type: "input",
       name: "last",
-      message: "what is the employees role ID?",
+      message: "what is the employees last name?",
+    },
+    {
+      type: "input",
+      name: "roleId",
+      message: "what is the employees role ID",
+    },
+    {
+      type: "input",
+      name: "managerId",
+      message: "what is the employees manager ID",
     },
   ])
   .then((answers) => {
